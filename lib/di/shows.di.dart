@@ -1,0 +1,25 @@
+import 'package:freeze_show/data/datasources/shows.remote.datasource.dart';
+import 'package:freeze_show/data/repositories/shows.repository_impl.dart';
+import 'package:freeze_show/di/base.di.dart';
+import 'package:freeze_show/di/injector.dart';
+import 'package:freeze_show/domain/repositories/shows.repository.dart';
+import 'package:freeze_show/domain/usecases/get_shows.use_case.dart';
+
+class ShowsDI extends BaseDI {
+  final _di = Injector().di;
+
+  @override
+  void registerAll() {
+    _di.registerFactory<ShowsDataSource>(
+      () => ShowsDataSourceImpl(http: _di()),
+    );
+
+    _di.registerFactory<ShowsRepository>(
+      () => ShowsRepositoryImpl(remote: _di()),
+    );
+
+    _di.registerFactory<GetShowsUseCase>(
+      () => GetShowsUseCaseImpl(repository: _di()),
+    );
+  }
+}
