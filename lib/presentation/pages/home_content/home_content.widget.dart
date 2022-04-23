@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeze_show/di/injector.dart';
-import 'package:freeze_show/domain/entities/show_item.entity.dart';
-import 'package:freeze_show/presentation/pages/home_bloc_provider.dart';
 import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
 import 'package:freeze_show/presentation/widgets/show_list_item.widget.dart';
 
-class HomeContent extends StatelessWidget {
-  const HomeContent({
-    Key? key,
-    required this.bloc,
-  }) : super(key: key);
+class HomeContent extends StatefulWidget {
+  const HomeContent({Key? key}) : super(key: key);
 
-  final HomeBloc bloc;
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  HomeBloc bloc = Injector().di.get<HomeBloc>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeBloc, HomeState>(
-      builder: (BuildContext context, state) {
-        final bloc =
-            HomeBlocProvider.of(context) ?? Injector().di.get<HomeBloc>();
+    return BlocProvider(
+      create: (context) => bloc,
+      child: const HomeContentData(),
+    );
+  }
+}
 
+class HomeContentData extends StatelessWidget {
+  const HomeContentData({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (BuildContext context, state) {
         if (state is HomeInitialState) {
-          return const Text("Nothing to see here 🤔");
+          return const Center(child: Text("Nothing to see here 🤔"));
+        }
+
+        if (state is HomeLoadingState) {
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (state is HomeErrorState) {
@@ -31,35 +44,25 @@ class HomeContent extends StatelessWidget {
           );
         }
 
-        return StreamBuilder<List<ShowItem>>(
-          stream: bloc.allShowsList,
-          builder: (context, snapshot) {
-            final showsList = snapshot.data;
-
-            if (showsList == null) {
-              return const SizedBox();
-            }
-
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisExtent: 330,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 15,
-              ),
-              itemBuilder: (context, index) {
-                final show = showsList[index];
-
-                return ShowListItem(index, show);
-              },
-            );
-          },
-        );
-      },
-      listener: (BuildContext context, state) {
         if (state is HomeShowsLoadedState) {
-          // bloc.urlsList.add(state.shortUrl);
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 330,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 15,
+            ),
+            itemBuilder: (context, index) {
+              final show = state.allShows[index];
+
+              return ShowListItem(index, show);
+            },
+          );
         }
+
+        return const Center(
+          child: Text("You were not supposed to see this 🤔"),
+        );
       },
     );
   }
