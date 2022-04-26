@@ -14,7 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }) : super(HomeInitialState()) {
     on<HomeGetAllShowsEvent>((event, emit) async {
       emit(HomeLoadingState());
-      final getShowsResult = await getShowsUseCase(event.page);
+      final getShowsResult = await getShowsUseCase(page: event.page);
 
       getShowsResult.fold(
         (failure) {

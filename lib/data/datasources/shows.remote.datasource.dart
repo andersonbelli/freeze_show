@@ -1,10 +1,13 @@
-import 'dart:convert';
-
 import 'package:freeze_show/core/http/http_manager.dart';
+import 'package:freeze_show/data/models/show_episode_item.model.dart';
 import 'package:freeze_show/data/models/show_item.model.dart';
 
 abstract class ShowsDataSource {
   Future<List<ShowItemModel>> getShows(int? page);
+
+  Future<List<ShowEpisodeItemModel>> getShowsSchedule(String? date);
+
+  Future<List<ShowEpisodeItemModel>> getShowsSearch(String search);
 }
 
 class ShowsDataSourceImpl extends ShowsDataSource {
@@ -18,8 +21,30 @@ class ShowsDataSourceImpl extends ShowsDataSource {
 
     final response = await http.get(endpoint);
 
-    return (jsonDecode(jsonEncode(response)) as List)
+    return (response as List)
         .map((e) => ShowItemModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<List<ShowEpisodeItemModel>> getShowsSchedule(String? date) async {
+    final String endpoint = "schedule${date != null ? "?date=$date" : ""}";
+
+    final response = await http.get(endpoint);
+
+    return (response as List)
+        .map((e) => ShowEpisodeItemModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<List<ShowEpisodeItemModel>> getShowsSearch(String search) async {
+    final String endpoint = "search/shows?q=$search";
+
+    final response = await http.get(endpoint);
+
+    return (response as List)
+        .map((e) => ShowEpisodeItemModel.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 }

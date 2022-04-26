@@ -4,6 +4,8 @@ import 'package:freeze_show/di/base.di.dart';
 import 'package:freeze_show/di/injector.dart';
 import 'package:freeze_show/domain/repositories/shows.repository.dart';
 import 'package:freeze_show/domain/usecases/get_shows.use_case.dart';
+import 'package:freeze_show/domain/usecases/get_shows_schedule.use_case.dart';
+import 'package:freeze_show/domain/usecases/get_shows_search.use_case.dart';
 
 class ShowsDI extends BaseDI {
   final _di = Injector().di;
@@ -20,6 +22,14 @@ class ShowsDI extends BaseDI {
 
     _di.registerFactory<GetShowsUseCase>(
       () => GetShowsUseCaseImpl(repository: _di()),
+    );
+
+    _di.registerFactory<GetShowsScheduleUseCase>(
+          () => GetShowsScheduleUseCaseImpl(repository: _di()),
+    );
+
+    _di.registerFactory<GetShowsSearchUseCase>(
+          () => GetShowsSearchUseCaseImpl(repository: _di()),
     );
   }
 }

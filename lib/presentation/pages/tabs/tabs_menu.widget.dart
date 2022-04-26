@@ -9,52 +9,55 @@ class TabsMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TabsCubit, int>(
       builder: (context, currentTab) {
-        return BottomNavigationBar(
-          backgroundColor: Colors.transparent,
-          type: BottomNavigationBarType.shifting,
-          showSelectedLabels: false,
-          showUnselectedLabels: true,
-          iconSize: 30,
-          onTap: (selected) => context.read<TabsCubit>().toggleTabs(selected),
-          currentIndex: currentTab,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.blueGrey,
+        return Theme(
+          data: ThemeData(),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.transparent,
+            type: BottomNavigationBarType.shifting,
+            showSelectedLabels: false,
+            showUnselectedLabels: true,
+            iconSize: 30,
+            onTap: (selected) => context.read<TabsCubit>().toggleTabs(selected),
+            currentIndex: currentTab,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white60,
+                ),
+                label: "Home",
+                backgroundColor: Colors.transparent,
+                activeIcon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
               ),
-              label: "Home",
-              backgroundColor: Colors.transparent,
-              activeIcon: Icon(
-                Icons.home,
-                color: Colors.white,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.star_border,
+                  color: Colors.white60,
+                ),
+                label: "Favorites",
+                backgroundColor: Colors.transparent,
+                activeIcon: Icon(
+                  Icons.star,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.star_border,
-                color: Colors.blueGrey,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white60,
+                ),
+                label: "Search",
+                backgroundColor: Colors.transparent,
+                activeIcon: Icon(
+                  Icons.search_sharp,
+                  color: Colors.white,
+                ),
               ),
-              label: "Favorites",
-              backgroundColor: Colors.transparent,
-              activeIcon: Icon(
-                Icons.star,
-                color: Colors.white,
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: Colors.blueGrey,
-              ),
-              label: "Search",
-              backgroundColor: Colors.transparent,
-              activeIcon: Icon(
-                Icons.search_sharp,
-                color: Colors.white,
-              ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

@@ -1,9 +1,9 @@
-import 'package:freeze_show/domain/show_item_image.entity.dart';
+import 'package:freeze_show/domain/entities/show_image_item.entity.dart';
 
 class ShowItemImageModel extends ShowItemImage {
   ShowItemImageModel({
-    required String medium,
-    required String original,
+    String? medium,
+    String? original,
   }) : super(
           medium: medium,
           original: original,

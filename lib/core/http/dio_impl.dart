@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:freeze_show/core/http/http_manager.dart';
 import 'package:freeze_show/core/http/models/http_exceptions.dart';
@@ -13,7 +15,7 @@ class DioImpl implements HttpManager {
       final response = await _dio.get("${ServerConfig.BASE_URL}/$endpoint");
 
       if (response.statusCode == 200) {
-        return response.data;
+        return jsonDecode(jsonEncode(response.data));
       }
 
       throw GenericException(response.data.toString());
