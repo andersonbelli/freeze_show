@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
 
-class HomeBlocProvider extends InheritedWidget {
+class MainBlocProvider extends InheritedWidget {
   final HomeBloc bloc;
 
-  const HomeBlocProvider({
+  const MainBlocProvider({
     Key? key,
     required Widget child,
     required this.bloc,
@@ -12,12 +12,12 @@ class HomeBlocProvider extends InheritedWidget {
 
   static HomeBloc? of(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<HomeBlocProvider>()
+        .dependOnInheritedWidgetOfExactType<MainBlocProvider>()
         ?.bloc;
   }
 
   @override
-  bool updateShouldNotify(HomeBlocProvider oldWidget) {
+  bool updateShouldNotify(MainBlocProvider oldWidget) {
     return true;
   }
 }

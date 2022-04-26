@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:freeze_show/core/utils/app_colors.dart';
 import 'package:freeze_show/di/core.di.dart';
 import 'package:freeze_show/di/injector.dart';
-import 'package:freeze_show/presentation/pages/home.page.dart';
-import 'package:freeze_show/presentation/pages/home_bloc_provider.dart';
+import 'package:freeze_show/presentation/pages/main.page.dart';
+import 'package:freeze_show/presentation/pages/main_bloc_provider.dart';
 import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   CoreDI().registerAll();
@@ -33,23 +34,24 @@ class _MainAppState extends State<MainApp> {
           AppColors.mainColor.value,
           AppColors.customWhite,
         ),
+        fontFamily: GoogleFonts.roboto().fontFamily
       ),
-      home: HomeBlocProvider(
+      home: MainBlocProvider(
         bloc: bloc,
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF390E72),
-                Color(0xFF001844),
+                Color(0xFF0765B2),
+                Color(0xFF00317C),
               ],
               begin: FractionalOffset.bottomLeft,
-              end: FractionalOffset.topRight,
-              stops: [0.0, 0.8],
+              end: FractionalOffset.bottomRight,
+              stops: [0.0, 1.0],
               tileMode: TileMode.mirror,
             ),
           ),
-          child: const HomePage(),
+          child: const MainPage(),
         ),
       ),
     );

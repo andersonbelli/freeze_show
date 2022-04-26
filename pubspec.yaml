@@ -17,6 +17,7 @@ dependencies:
   dio: ^4.0.4 # Http handler
   dartz: ^0.10.1 # Tools to simplify dart data
   rxdart: ^0.27.3 # Reactive functions
+  google_fonts: ^2.3.2 # Fonts
 
   cupertino_icons: ^1.0.2
 

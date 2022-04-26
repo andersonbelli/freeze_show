@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeze_show/presentation/pages/home_content/home_content.widget.dart';
+import 'package:freeze_show/presentation/pages/search_content/search_content.widget.dart';
 import 'package:freeze_show/presentation/pages/tabs/tabs.cubit.dart';
 
 class TabsContent extends StatelessWidget {
@@ -12,11 +13,11 @@ class TabsContent extends StatelessWidget {
       builder: (context, currentTab) {
         switch (currentTab) {
           case 0:
-            return const HomeContent();
+            return HomeContent();
           case 1:
             return const Text("FAVORITES :D");
           case 2:
-            return const Text("SEARCH :D");
+            return const SearchContent();
         }
 
         return const Center(

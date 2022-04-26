@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color mainColor = Color.fromRGBO(193, 195, 211, 1.0);
+  static const Color mainColor = Color.fromRGBO(59, 17, 215, 1.0);
 
   static const Map<int, Color> customWhite = {
     50: Color.fromRGBO(248, 248, 255, .1),
