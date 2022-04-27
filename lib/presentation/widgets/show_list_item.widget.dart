@@ -67,10 +67,13 @@ class ShowListItem extends StatelessWidget {
                     ),
                   );
                 });
-                return Row(
-                  children: [
-                    ...showsGenres,
-                  ],
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ...showsGenres,
+                    ],
+                  ),
                 );
               },
             )

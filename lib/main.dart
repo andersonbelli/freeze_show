@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeze_show/core/utils/app_colors.dart';
 import 'package:freeze_show/di/core.di.dart';
 import 'package:freeze_show/di/injector.dart';
+import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
+import 'package:freeze_show/presentation/pages/item_details/item_details_bloc.dart';
 import 'package:freeze_show/presentation/pages/main.page.dart';
 import 'package:freeze_show/presentation/pages/main_bloc_provider.dart';
-import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
+import 'package:freeze_show/presentation/pages/search_content/search.bloc.dart';
+import 'package:freeze_show/presentation/pages/search_content/search_bar/search_bar.cubit.dart';
+import 'package:freeze_show/presentation/pages/tabs/tabs.cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -25,33 +30,52 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Freeze Show',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: MaterialColor(
-          AppColors.mainColor.value,
-          AppColors.customWhite,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => Injector().di.get<TabsCubit>(),
         ),
-        fontFamily: GoogleFonts.roboto().fontFamily
-      ),
-      home: MainBlocProvider(
-        bloc: bloc,
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF0765B2),
-                Color(0xFF00317C),
-              ],
-              begin: FractionalOffset.bottomLeft,
-              end: FractionalOffset.bottomRight,
-              stops: [0.0, 1.0],
-              tileMode: TileMode.mirror,
-            ),
+        BlocProvider(
+          create: (_) => Injector().di.get<SearchBarCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => Injector().di.get<HomeBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => Injector().di.get<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => Injector().di.get<ItemDetailsBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Freeze Show',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: MaterialColor(
+            AppColors.mainColor.value,
+            AppColors.customWhite,
           ),
-          child: const MainPage(),
+          fontFamily: GoogleFonts.roboto().fontFamily,
+        ),
+        home: MainBlocProvider(
+          bloc: bloc,
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF0765B2),
+                  Color(0xFF00317C),
+                ],
+                begin: FractionalOffset.bottomLeft,
+                end: FractionalOffset.bottomRight,
+                stops: [0.0, 1.0],
+                tileMode: TileMode.mirror,
+              ),
+            ),
+            child: const MainPage(),
+          ),
         ),
       ),
     );

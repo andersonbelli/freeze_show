@@ -20,8 +20,6 @@ class DioImpl implements HttpManager {
 
       throw GenericException(response.data.toString());
     } on DioError catch (e) {
-      print("e => $e");
-
       if (e.response?.statusCode == 404) {
         throw UrlNotFoundException(error: e.message);
       } else {

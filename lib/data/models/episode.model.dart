@@ -5,9 +5,9 @@ class EpisodeModel extends Episode {
     required String href,
   }) : super(href: href);
 
-  factory EpisodeModel.fromJson(Map<String, dynamic> json) {
+  factory EpisodeModel.fromJson(Map<String, dynamic> map) {
     return EpisodeModel(
-      href: json['href'] as String,
+      href: map['href'] as String,
     );
   }
 

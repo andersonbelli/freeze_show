@@ -24,7 +24,7 @@ class MainAppBar extends StatelessWidget {
                   switch (currentTab) {
                     case 0:
                       return const AppTitle();
-                    case 2:
+                    case 1:
                       return SearchBar();
                     default:
                       return const AppTitle();

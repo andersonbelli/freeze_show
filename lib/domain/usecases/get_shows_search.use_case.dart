@@ -14,6 +14,7 @@ class GetShowsSearchUseCaseImpl extends GetShowsSearchUseCase {
 
   @override
   Future<Either<BaseException, List<ShowEpisodeItem>>> call(
-          String search) async =>
+    String search,
+  ) async =>
       repository.getShowsSearch(search);
 }

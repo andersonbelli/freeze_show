@@ -16,7 +16,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     this.getShowsScheduleUseCase,
   ) : super(SearchInitialState()) {
     on<LoadInitialListEvent>((event, emit) async {
-      emit(LoadingState());
+      emit(SearchLoadingState());
 
       final getShowsScheduleResult = await getShowsScheduleUseCase();
 
@@ -34,7 +34,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       );
     });
     on<SearchShowEvent>((event, emit) async {
-      emit(LoadingState());
+      emit(SearchLoadingState());
 
       final getSearchResult = await getShowsSearchUseCase(event.search);
 
