@@ -65,7 +65,7 @@ class SearchBar extends StatelessWidget {
           BlocBuilder(
             bloc: bloc,
             builder: (context, state) {
-              state is! LoadingState
+              state is! SearchLoadingState
                   ? context.read<SearchBarCubit>().toggleSearchButton(true)
                   : context.read<SearchBarCubit>().toggleSearchButton(false);
 

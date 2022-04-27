@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freeze_show/presentation/pages/item_details/item_details.page.dart';
 import 'package:freeze_show/presentation/pages/search_content/search.bloc.dart';
 import 'package:freeze_show/presentation/widgets/episode_list_item.widget.dart';
 import 'package:freeze_show/presentation/widgets/show_list_item.widget.dart';
@@ -44,7 +45,7 @@ class SearchList extends StatelessWidget {
         builder: (BuildContext context, state) {
           if (state is SearchInitialState) {
             return const Center(child: Text("Nothing to see here 🤔"));
-          } else if (state is LoadingState) {
+          } else if (state is SearchLoadingState) {
             return const Center(
               child: CircularProgressIndicator(
                 color: Colors.white70,
@@ -68,26 +69,35 @@ class SearchList extends StatelessWidget {
             return ListView.separated(
               itemCount: state.searchResults.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Container(
-                      height: 5,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(45),
-                          topLeft: Radius.circular(45),
-                        ),
-                        color: Colors.black45,
-                      ),
-                    ),
-                    Container(
-                      color: Colors.black45,
-                      child: ShowListItem(
-                        index,
+                return InkWell(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ItemDetails(
                         state.searchResults[index].show,
                       ),
                     ),
-                  ],
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 5,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(45),
+                            topLeft: Radius.circular(45),
+                          ),
+                          color: Colors.black45,
+                        ),
+                      ),
+                      Container(
+                        color: Colors.black45,
+                        child: ShowListItem(
+                          index,
+                          state.searchResults[index].show,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
@@ -110,23 +120,32 @@ class SearchList extends StatelessWidget {
             return ListView.separated(
               itemCount: state.listResults.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Container(
-                      height: 5,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(45),
-                          topLeft: Radius.circular(45),
-                        ),
-                        color: Colors.black45,
+                return InkWell(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ItemDetails(
+                        state.listResults[index].show,
                       ),
                     ),
-                    EpisodeListItem(
-                      index,
-                      state.listResults[index],
-                    ),
-                  ],
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 5,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(45),
+                            topLeft: Radius.circular(45),
+                          ),
+                          color: Colors.black45,
+                        ),
+                      ),
+                      EpisodeListItem(
+                        index,
+                        state.listResults[index],
+                      ),
+                    ],
+                  ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {

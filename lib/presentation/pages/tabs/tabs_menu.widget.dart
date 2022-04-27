@@ -19,6 +19,7 @@ class TabsMenu extends StatelessWidget {
             iconSize: 30,
             onTap: (selected) => context.read<TabsCubit>().toggleTabs(selected),
             currentIndex: currentTab,
+            elevation: 0,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
@@ -29,18 +30,6 @@ class TabsMenu extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 activeIcon: Icon(
                   Icons.home,
-                  color: Colors.white,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.star_border,
-                  color: Colors.white60,
-                ),
-                label: "Favorites",
-                backgroundColor: Colors.transparent,
-                activeIcon: Icon(
-                  Icons.star,
                   color: Colors.white,
                 ),
               ),

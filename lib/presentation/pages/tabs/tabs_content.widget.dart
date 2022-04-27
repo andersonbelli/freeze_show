@@ -15,14 +15,10 @@ class TabsContent extends StatelessWidget {
           case 0:
             return HomeContent();
           case 1:
-            return const Text("FAVORITES :D");
-          case 2:
             return const SearchContent();
+          default:
+            return HomeContent();
         }
-
-        return const Center(
-          child: Text("You were not supposed to see this 🤔"),
-        );
       },
     );
   }

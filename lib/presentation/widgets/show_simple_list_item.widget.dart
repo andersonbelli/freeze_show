@@ -15,9 +15,15 @@ class ShowSimpleListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: 12,
-        right: 12,
-        top: 15,
+        left: 6,
+        right: 6,
+        top: 7,
+      ),
+      padding: const EdgeInsets.only(
+        top: 10,
+        left: 6,
+        right: 6,
+        bottom: 10,
       ),
       child: Column(
         children: [
@@ -33,8 +39,9 @@ class ShowSimpleListItem extends StatelessWidget {
                       height: 300,
                       errorBuilder: (context, error, stackTrace) {
                         return const Image(
-                          image:
-                              AssetImage('assets/film-poster-placeholder1.png'),
+                          image: AssetImage(
+                            'assets/film-poster-placeholder1.png',
+                          ),
                         );
                       },
                     )

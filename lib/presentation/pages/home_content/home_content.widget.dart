@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeze_show/di/injector.dart';
 import 'package:freeze_show/presentation/pages/home_content/home.bloc.dart';
+import 'package:freeze_show/presentation/pages/item_details/item_details.page.dart';
 import 'package:freeze_show/presentation/widgets/show_simple_list_item.widget.dart';
 
 class HomeContent extends StatelessWidget {
@@ -12,11 +13,15 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
-      builder: (BuildContext context, state) {
+      builder: (BuildContext _, state) {
         if (state is HomeInitialState) {
           return const Center(child: Text("Nothing to see here 🤔"));
         } else if (state is HomeLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white70,
+            ),
+          );
         } else if (state is HomeErrorState) {
           return Center(
             child: Text("There was an error 😔 \n ${state.message}"),
@@ -28,10 +33,17 @@ class HomeContent extends StatelessWidget {
               mainAxisExtent: 330,
               mainAxisSpacing: 15,
             ),
-            itemBuilder: (context, index) {
+            itemBuilder: (_, index) {
               final show = state.allShows[index];
 
-              return ShowSimpleListItem(index, show);
+              return InkWell(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ItemDetails(show),
+                  ),
+                ),
+                child: ShowSimpleListItem(index, show),
+              );
             },
           );
         } else {
