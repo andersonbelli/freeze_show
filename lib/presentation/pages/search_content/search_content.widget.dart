@@ -60,7 +60,7 @@ class SearchList extends StatelessWidget {
               return Center(
                 child: Text(
                   "Sorry, the show you searched for was not found 😔",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
               );

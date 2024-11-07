@@ -34,7 +34,7 @@ class EpisodeListItem extends StatelessWidget {
         title: Text(
           episode.name == "" ? episode.show.name : episode.name,
           textAlign: TextAlign.start,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         subtitle: Column(
           children: [
