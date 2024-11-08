@@ -25,7 +25,7 @@ class MainAppBar extends StatelessWidget {
                     case 0:
                       return const AppTitle();
                     case 1:
-                      return SearchBar();
+                      return AppSearchBar();
                     default:
                       return const AppTitle();
                   }

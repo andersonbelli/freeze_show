@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:freeze_show/di/injector.dart';
 import 'package:freeze_show/domain/entities/episode_details.entity.dart';
 import 'package:freeze_show/domain/entities/show_item.entity.dart';
@@ -165,10 +164,12 @@ class _ItemDetailsState extends State<ItemDetails> {
                           width: double.maxFinite,
                           child: Text(
                             widget.show.name,
-                            style:
-                                Theme.of(context).textTheme.headline3?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.copyWith(
+                                  color: Colors.white,
+                                ),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -221,9 +222,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                         const SizedBox(),
                       if (widget.show.summary != null &&
                           widget.show.summary!.isNotEmpty)
-                        ShowDetailsItem(
+                        const ShowDetailsItem(
                           title: "Summary",
-                          body: Html(data: widget.show.summary ?? ""),
+                          body: Text(""),
                         )
                       else
                         const SizedBox(),
@@ -314,13 +315,11 @@ class _ItemDetailsState extends State<ItemDetails> {
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
                                             horizontal: 8.0,
                                           ),
-                                          child: Html(
-                                            data: element.summary ?? "",
-                                          ),
+                                          child: Text(""),
                                         ),
                                       ],
                                     ),
@@ -349,7 +348,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                                     ),
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.white24,
+                                        backgroundColor: Colors.white24,
                                       ),
                                       onPressed: () => bloc.add(
                                         ItemDetailsGetAllEpisodesFromSeasonEvent(

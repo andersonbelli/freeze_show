@@ -4,13 +4,13 @@ import 'package:freeze_show/di/injector.dart';
 import 'package:freeze_show/presentation/pages/search_content/search.bloc.dart';
 import 'package:freeze_show/presentation/pages/search_content/search_bar/search_bar.cubit.dart';
 
-class SearchBar extends StatelessWidget {
+class AppSearchBar extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
 
   final SearchBloc bloc = Injector().di.get<SearchBloc>();
   final SearchBarCubit searchCubit = Injector().di.get<SearchBarCubit>();
 
-  SearchBar({Key? key}) : super(key: key);
+  AppSearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +84,7 @@ class SearchBar extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(12),
                   shape: const CircleBorder(),
-                  primary: Colors.white,
-                  onPrimary: Colors.black87,
+                  backgroundColor: Colors.white,
                 ),
                 child: const Icon(Icons.search),
               );

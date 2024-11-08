@@ -13,11 +13,11 @@ dependencies:
     sdk: flutter
 
   get_it: ^7.2.0 # Dependency Injector
-  flutter_bloc: ^8.0.1 # State manager
-  dio: ^4.0.4 # Http handler
+  flutter_bloc: ^8.1.6 # State manager
+  dio: ^5.7.0 # Http handler
   dartz: ^0.10.1 # Tools to simplify dart data
-  rxdart: ^0.27.3 # Reactive functions
-  google_fonts: ^2.3.2 # Fonts
+  rxdart: ^0.28.0 # Reactive functions
+  google_fonts: ^6.2.1 # Fonts
   flutter_html: ^2.2.1 # Html parser
 
   cupertino_icons: ^1.0.2
@@ -26,7 +26,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
 
@@ -35,4 +35,3 @@ flutter:
   assets:
     - assets/app-icon.png
     - assets/film-poster-placeholder1.png
-    - assets/bg.png
