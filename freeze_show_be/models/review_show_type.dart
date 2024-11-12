@@ -1,0 +1,1 @@
+enum ReviewShowType { serie, episode }
